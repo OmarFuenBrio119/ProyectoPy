@@ -1,68 +1,109 @@
-
-lista_elements = [{
-    "id" : "1",
-    "name" : "Emmanuel",
-    "last_name" : "Aguilar"
-}]
-
-
+lista_elements = [
+    {
+        "id": 1,
+        "name": "Francisco",
+        "last_name": "Lopez"
+    },
+    {
+        "id": 2,
+        "name": "Pedro",
+        "last_name": "Perez"
+    }
+]
 
 def add_element():
-    id = int(input('Ingresa el ID de la persona'))
-    name = input("Escribe el nombre: ")
-    last_name = input("Ingresa el apellido: ")
+    id = int(input('Ingresa el ID de la persona: '))
+    name = input("Ingresa el nombre de la persona: ")
+    last_name = input('Ingresa el apellido de la persona: ')
     person = {
+        "id": id,
         "name": name,
-        "last_name" : last_name
+        "last_name": last_name
     }
     lista_elements.append(person)
-    pass
 
 def remove_element():
-    pass
-
-def show_element():
-    for elemnt in lista_elements:
-        for key, value in elemnt.items(): 
-         print(f"{key} -> {value}")
-    pass
+    id = int(input('Ingresa el ID del elemento a Eliminar: '))
+    found = find_element(id)
+    if found:
+        print(found)
+        aceptar = input("Estás seguro? (S/N)")
+        if aceptar == "S":
+            lista_elements.remove(found)
+            print("Elemento Eliminado")
+    else:
+        print(f"El elemento con Id {id} no  existe")
+    
+def find_element(id):
+    for element in lista_elements:
+        if element['id'] == id:
+         return found
 
 def show_elements():
-    pass
-
+    # for para iterar y mostrar
+    for element in lista_elements:
+        print(f"Alumno: {element['name']} {element['last_name']}")
+        
 def edit_element():
-    pass
-
+    id = int(input('Ingresa el ID del elemento a editar: '))
+    found = find_element(id)
+    print(found)
+    if found:
+        index = lista_elements.index(found)
+        name = input("Ingresa el nuevo nombre, deja en blanco para conservar: \n")
+        last_name = input("Ingresa el nuevo apellido, deja en blanco para conservar: \n")
+        if name != '':
+            lista_elements[index]['name'] = name
+        if last_name != '':
+            lista_elements[index]['last_name'] = last_name
+    else:
+        print(f"El elemento con Id {id} no  existe")
+        '''name = input("Ingresa el nuevo nombre de la persona: ")
+        last_name = input('Ingresa el nuevo apellido de la persona: ')
+    person = {
+        "id": id,
+        "name": name,
+        "last_name": last_name
+    }
+    lista_elements.remove(found)
+    lista_elements.append(person)'''
 
 
 if __name__ == '__main__':
     menu = '''
-    implementacion de CRUD de Elemento
-    Elige una opcion 
-    1.-Insectar
-    2.-Mostarr todos
-    3.-Buscar por id
-    4.-Editar 
-    5.-Eliminar
-    6.-Salir
+    Implementación de CRUD de Elementos:
+    Elige una Opción
+    1 - Insertar
+    2 - Mostrar todos
+    3 - Buscar por ID
+    4 - Editar
+    5 - Eliminar
+    6 - Salir
     '''
-
     while True:
         opcion = input(menu)
         if opcion == '1':
-            print("Insectar elemento")
+            print("Insertar Elemento")
             add_element()
         elif opcion == '2':
-            print("Mostar todos los elemntos")
-            show_element()
+            print("Mostrar todos los elementos")
+            show_elements()
         elif opcion == '3':
-            print("Buscar po ID")
+            print("Busca por ID")
+            id = int(input("Ingresa el ID a buscar: "))
+            found = find_element(id)
+            if found:
+                 print(found)
+            else:
+                print(f"El elemento con Id {id} no  existe")
         elif opcion == '4':
-            print("Editar elemento")
-        elif opcion == '15':
-            print("Elimi9nar elemnto")    
+            print("Editar Elemento")
+            edit_element()
+        elif opcion == '5':
+            print("Eliminar Elemento")
+            remove_element()
         elif opcion == '6':
-            print('Bye')
-        else :
-            print("Opcion incorrecta")
-            break;
+            print('Bye!')
+            break
+        else:
+            print("Opción Incorrecta!")
