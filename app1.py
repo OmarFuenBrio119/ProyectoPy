@@ -1,15 +1,7 @@
-lista_elements = [
-    {
-        "id": 1,
-        "name": "Francisco",
-        "last_name": "Lopez"
-    },
-    {
-        "id": 2,
-        "name": "Pedro",
-        "last_name": "Perez"
-    }
-]
+import json
+with open ('elemento.json', 'r') as file:
+    lista_elements = json.load(file)
+
 
 def add_element():
     id = int(input('Ingresa el ID de la persona: '))
@@ -21,6 +13,7 @@ def add_element():
         "last_name": last_name
     }
     lista_elements.append(person)
+    guardar_lista()
 
 def remove_element():
     id = int(input('Ingresa el ID del elemento a Eliminar: '))
@@ -31,6 +24,7 @@ def remove_element():
         if aceptar == "S":
             lista_elements.remove(found)
             print("Elemento Eliminado")
+            guardar_lista()
     else:
         print(f"El elemento con Id {id} no  existe")
     
@@ -45,6 +39,7 @@ def show_elements():
         print(f"Alumno: {element['name']} {element['last_name']}")
         
 def edit_element():
+
     id = int(input('Ingresa el ID del elemento a editar: '))
     found = find_element(id)
     print(found)
@@ -56,6 +51,7 @@ def edit_element():
             lista_elements[index]['name'] = name
         if last_name != '':
             lista_elements[index]['last_name'] = last_name
+            guardar_lista()
     else:
         print(f"El elemento con Id {id} no  existe")
         '''name = input("Ingresa el nuevo nombre de la persona: ")
@@ -67,6 +63,13 @@ def edit_element():
     }
     lista_elements.remove(found)
     lista_elements.append(person)'''
+
+def guardar_lista():
+    with open('elemento.json', 'w') as file:
+        json.dump(lista_elements, file, indent=4)
+
+
+
 
 
 if __name__ == '__main__':

@@ -1,3 +1,8 @@
+import json
+with open ('elemento.json', 'r') as file:
+    lista_elements = json.load(file)
+
+
 lista_elemts=[]
 
 def add_elemet(id,name,ape):
